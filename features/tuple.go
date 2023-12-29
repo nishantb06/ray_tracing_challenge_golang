@@ -133,3 +133,22 @@ func Subtract(a, b Tuple) (Tuple, error) {
 		property,
 	}, nil
 }
+
+func Negate(a Tuple) (Tuple, error) {
+	if a.GetProperty() == "point" {
+		return &PointArray{
+			-a.GetX(),
+			-a.GetY(),
+			-a.GetZ(),
+			-a.GetW(),
+			"point",
+		}, nil
+	}
+	return &VectorArray{
+		-a.GetX(),
+		-a.GetY(),
+		-a.GetZ(),
+		-a.GetW(),
+		"vector",
+	}, nil
+}

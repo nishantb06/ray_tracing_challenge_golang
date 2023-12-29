@@ -130,3 +130,41 @@ func TestSubtract(t *testing.T) {
 		t.Error("coordinate z should be -6")
 	}
 }
+
+func TestNegate(t *testing.T) {
+	a1 := features.Point(1, -2, 3)
+	a2, _ := features.Negate(a1)
+	if a2.GetProperty() != "point" {
+		t.Error("Point property should be point")
+	}
+	if a2.GetW() != -1.0 {
+		t.Error("coordinate w should be 1")
+	}
+	if a2.GetX() != -1 {
+		t.Error("coordinate x should be -1")
+	}
+	if a2.GetY() != 2 {
+		t.Error("coordinate y should be 2")
+	}
+	if a2.GetZ() != -3 {
+		t.Error("coordinate z should be -3")
+	}
+
+	v1 := features.Vector(1, -2, 3)
+	v2, _ := features.Negate(v1)
+	if v2.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if v2.GetW() != 0.0 {
+		t.Error("coordinate w should be 0")
+	}
+	if v2.GetX() != -1 {
+		t.Error("coordinate x should be -1")
+	}
+	if v2.GetY() != 2 {
+		t.Error("coordinate y should be 2")
+	}
+	if v2.GetZ() != -3 {
+		t.Error("coordinate z should be -3")
+	}
+}
