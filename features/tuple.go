@@ -100,3 +100,36 @@ func Add(a, b Tuple) (Tuple, error) {
 		"point",
 	}, nil
 }
+
+func Subtract(a, b Tuple) (Tuple, error) {
+	if a.GetProperty() == "vector" && b.GetProperty() == "point" {
+		return nil, fmt.Errorf("cannot subtract point from vector")
+	}
+
+	w := a.GetW() - b.GetW()
+
+	var property string
+	if w == 1.0 {
+		property = "point"
+	} else {
+		property = "vector"
+	}
+
+	if property == "vector" {
+		return &VectorArray{
+			a.GetX() - b.GetX(),
+			a.GetY() - b.GetY(),
+			a.GetZ() - b.GetZ(),
+			w,
+			property,
+		}, nil
+	}
+
+	return &PointArray{
+		a.GetX() - b.GetX(),
+		a.GetY() - b.GetY(),
+		a.GetZ() - b.GetZ(),
+		w,
+		property,
+	}, nil
+}
