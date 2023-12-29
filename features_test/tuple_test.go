@@ -2,10 +2,13 @@ package features
 
 import (
 	"fmt"
+	"math"
 	"testing"
 
 	"github.com/nishantb06/ray_tracing_challenge_golang/features"
 )
+
+const epsilon = 0.00001
 
 func TestGetTuple(t *testing.T) {
 	fmt.Println("Hello, World!")
@@ -276,5 +279,87 @@ func TestDivide(t *testing.T) {
 	}
 	if v2.GetZ() != 1.5 {
 		t.Error("coordinate z should be 1.5")
+	}
+}
+
+func TestMagnitude(t *testing.T) {
+	v1 := features.Vector(1, 0, 0)
+	if features.Magnitude(v1) != 1.0 {
+		t.Error("magnitude should be 1")
+	}
+
+	v2 := features.Vector(0, 1, 0)
+	if features.Magnitude(v2) != 1.0 {
+		t.Error("magnitude should be 1")
+	}
+
+	v3 := features.Vector(0, 0, 1)
+	if features.Magnitude(v3) != 1.0 {
+		t.Error("magnitude should be 1")
+	}
+
+	v4 := features.Vector(1, 2, 3)
+	if features.Magnitude(v4) != math.Sqrt(14) {
+		t.Error("magnitude should be square root of 14")
+	}
+
+	v5 := features.Vector(-1, -2, -3)
+	if features.Magnitude(v5) != math.Sqrt(14) {
+		t.Error("magnitude should be square root of 14")
+	}
+}
+
+func TestNormalize(t *testing.T) {
+	v1 := features.Vector(4, 0, 0)
+	v2, _ := features.Normalize(v1)
+	if v2.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if math.Abs(v2.GetW()-0.0) > epsilon {
+		t.Error("coordinate w should be 0")
+	}
+	if math.Abs(v2.GetX()-1) > epsilon {
+		t.Error("coordinate x should be 1")
+	}
+	if math.Abs(v2.GetY()-0) > epsilon {
+		t.Error("coordinate y should be 0")
+	}
+	if math.Abs(v2.GetZ()-0) > epsilon {
+		t.Error("coordinate z should be 0")
+	}
+
+	v3 := features.Vector(1, 2, 3)
+	v4, _ := features.Normalize(v3)
+	if v4.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if math.Abs(v4.GetW()-0.0) > epsilon {
+		t.Error("coordinate w should be 0")
+	}
+	if math.Abs(v4.GetX()-0.26726) > epsilon {
+		t.Error("coordinate x should be 0.26726")
+	}
+	if math.Abs(v4.GetY()-0.53452) > epsilon {
+		t.Error("coordinate y should be 0.53452")
+	}
+	if math.Abs(v4.GetZ()-0.80178) > epsilon {
+		t.Error("coordinate z should be 0.80178")
+	}
+
+	v5, _ := features.Normalize(v4)
+	if v5.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if math.Abs(v5.GetW()-0.0) > epsilon {
+		t.Error("coordinate w should be 0")
+	}
+	if math.Abs(v5.GetX()-0.26726) > epsilon {
+		t.Error("coordinate x should be 0.26726")
+	}
+	if math.Abs(v5.GetY()-0.53452) > epsilon {
+		t.Error("coordinate y should be 0.53452")
+	}
+	if math.Abs(v5.GetZ()-0.80178) > epsilon {
+		t.Error("coordinate z should be 0.80178")
 	}
 }

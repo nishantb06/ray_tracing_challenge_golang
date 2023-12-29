@@ -1,6 +1,9 @@
 package features
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Tuple interface {
 	GetX() float64
@@ -190,3 +193,13 @@ func Divide(a Tuple, b float64) (Tuple, error) {
 		"vector",
 	}, nil
 }
+
+func Magnitude(a Tuple) float64 {
+	return math.Sqrt(a.GetX()*a.GetX() + a.GetY()*a.GetY() + a.GetZ()*a.GetZ() + a.GetW()*a.GetW())
+}
+
+func Normalize(a Tuple) (Tuple, error) {
+	magnitude := Magnitude(a)
+	return Divide(a, magnitude)
+}
+
