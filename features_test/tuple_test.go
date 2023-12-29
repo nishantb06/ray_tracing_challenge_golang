@@ -47,3 +47,24 @@ func TestGetTuple(t *testing.T) {
 		t.Error("coordinate w should be 0")
 	}
 }
+
+func TestAdd(t *testing.T) {
+	a1 := features.Point(3, -2, 5)
+	a2 := features.Vector(-2, 3, 1)
+	a3 := features.Add(a1, a2)
+	if a3.GetProperty() != "point" {
+		t.Error("Point property should be point")
+	}
+	if a3.GetW() != 1 {
+		t.Error("coordinate w should be 1")
+	}
+	if a3.GetX() != 1 {
+		t.Error("coordinate x should be 1")
+	}
+	if a3.GetY() != 1 {
+		t.Error("coordinate y should be 1")
+	}
+	if a3.GetZ() != 6 {
+		t.Error("coordinate z should be 6")
+	}
+}

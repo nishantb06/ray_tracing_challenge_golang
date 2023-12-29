@@ -86,3 +86,13 @@ func GetTuple(tupleType string, x, y, z float64) (Tuple, error) {
 	}
 	return nil, fmt.Errorf("unsupported tuple type: %s", tupleType)
 }
+
+func Add(a, b Tuple) Tuple {
+	return &PointArray{
+		a.GetX() + b.GetX(),
+		a.GetY() + b.GetY(),
+		a.GetZ() + b.GetZ(),
+		a.GetW() + b.GetW(),
+		"point",
+	}
+}
