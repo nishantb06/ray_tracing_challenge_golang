@@ -203,3 +203,14 @@ func Normalize(a Tuple) (Tuple, error) {
 	return Divide(a, magnitude)
 }
 
+func Dot(a, b Tuple) float64 {
+	return a.GetX()*b.GetX() + a.GetY()*b.GetY() + a.GetZ()*b.GetZ() + a.GetW()*b.GetW()
+}
+
+func Cross(a, b Tuple) (Tuple, error) {
+	return Vector(
+		a.GetY()*b.GetZ()-a.GetZ()*b.GetY(),
+		a.GetZ()*b.GetX()-a.GetX()*b.GetZ(),
+		a.GetX()*b.GetY()-a.GetY()*b.GetX(),
+	), nil
+}

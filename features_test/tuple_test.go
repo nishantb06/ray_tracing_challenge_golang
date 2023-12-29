@@ -363,3 +363,48 @@ func TestNormalize(t *testing.T) {
 		t.Error("coordinate z should be 0.80178")
 	}
 }
+
+func TestDot(t *testing.T) {
+	v1 := features.Vector(1, 2, 3)
+	v2 := features.Vector(2, 3, 4)
+	if features.Dot(v1, v2) != 20 {
+		t.Error("dot product should be 20")
+	}
+}
+
+func TestCross(t *testing.T) {
+	v1 := features.Vector(1, 2, 3)
+	v2 := features.Vector(2, 3, 4)
+	v3, _ := features.Cross(v1, v2)
+	if v3.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if v3.GetW() != 0.0 {
+		t.Error("coordinate w should be 0")
+	}
+	if v3.GetX() != -1 {
+		t.Error("coordinate x should be -1")
+	}
+	if v3.GetY() != 2 {
+		t.Error("coordinate y should be 2")
+	}
+	if v3.GetZ() != -1 {
+		t.Error("coordinate z should be -1")
+	}
+	v4, _ := features.Cross(v2, v1)
+	if v4.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if v4.GetW() != 0.0 {
+		t.Error("coordinate w should be 0")
+	}
+	if v4.GetX() != 1 {
+		t.Error("coordinate x should be 1")
+	}
+	if v4.GetY() != -2 {
+		t.Error("coordinate y should be -2")
+	}
+	if v4.GetZ() != 1 {
+		t.Error("coordinate z should be 1")
+	}
+}
