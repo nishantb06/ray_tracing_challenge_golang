@@ -171,3 +171,22 @@ func Multiply(a Tuple, b float64) (Tuple, error) {
 		"vector",
 	}, nil
 }
+
+func Divide(a Tuple, b float64) (Tuple, error) {
+	if a.GetProperty() == "point" {
+		return &PointArray{
+			a.GetX() / b,
+			a.GetY() / b,
+			a.GetZ() / b,
+			a.GetW() / b,
+			"point",
+		}, nil
+	}
+	return &VectorArray{
+		a.GetX() / b,
+		a.GetY() / b,
+		a.GetZ() / b,
+		a.GetW() / b,
+		"vector",
+	}, nil
+}
