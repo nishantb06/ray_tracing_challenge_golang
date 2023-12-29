@@ -51,7 +51,7 @@ func TestGetTuple(t *testing.T) {
 func TestAdd(t *testing.T) {
 	a1 := features.Point(3, -2, 5)
 	a2 := features.Vector(-2, 3, 1)
-	a3 := features.Add(a1, a2)
+	a3,_ := features.Add(a1, a2)
 	if a3.GetProperty() != "point" {
 		t.Error("Point property should be point")
 	}
