@@ -168,3 +168,75 @@ func TestNegate(t *testing.T) {
 		t.Error("coordinate z should be -3")
 	}
 }
+
+func TestMultiply(t *testing.T) {
+	a1 := features.Point(-2, 3, -4)
+	a2, _ := features.Multiply(a1, 3.5)
+	if a2.GetProperty() != "point" {
+		t.Error("Point property should be point")
+	}
+	if a2.GetW() != 3.5 {
+		t.Error("coordinate w should be 3.5")
+	}
+	if a2.GetX() != -7 {
+		t.Error("coordinate x should be 3.5")
+	}
+	if a2.GetY() != 10.5 {
+		t.Error("coordinate y should be -7")
+	}
+	if a2.GetZ() != -14.0 {
+		t.Error("coordinate z should be 14")
+	}
+
+	v1 := features.Vector(1, -2, 3)
+	v2, _ := features.Multiply(v1, 3.5)
+	if v2.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if v2.GetW() != 0.0 {
+		t.Error("coordinate w should be 0")
+	}
+	if v2.GetX() != 3.5 {
+		t.Error("coordinate x should be 3.5")
+	}
+	if v2.GetY() != -7 {
+		t.Error("coordinate y should be -7")
+	}
+	if v2.GetZ() != 10.5 {
+		t.Error("coordinate z should be 10.5")
+	}
+
+	v3, _ := features.Multiply(v1, 0.5)
+	if v3.GetProperty() != "vector" {
+		t.Error("Vector property should be vector")
+	}
+	if v3.GetW() != 0.0 {
+		t.Error("coordinate w should be 0")
+	}
+	if v3.GetX() != 0.5 {
+		t.Error("coordinate x should be 0.5")
+	}
+	if v3.GetY() != -1 {
+		t.Error("coordinate y should be -1")
+	}
+	if v3.GetZ() != 1.5 {
+		t.Error("coordinate z should be 1.5")
+	}
+
+	a3, _ := features.Multiply(a1, 0.5)
+	if a3.GetProperty() != "point" {
+		t.Error("Point property should be point")
+	}
+	if a3.GetW() != 0.5 {
+		t.Error("coordinate w should be 0.5")
+	}
+	if a3.GetX() != -1 {
+		t.Error("coordinate x should be -1")
+	}
+	if a3.GetY() != 1.5 {
+		t.Error("coordinate y should be 1.5")
+	}
+	if a3.GetZ() != -2 {
+		t.Error("coordinate z should be -2")
+	}
+}
