@@ -1,6 +1,7 @@
 package features
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/nishantb06/ray_tracing_challenge_golang/features"
@@ -119,3 +120,38 @@ func TestHadamardProductColor(t *testing.T) {
 		t.Error("Blue should be 12")
 	}
 }
+
+func TestCanvas(t *testing.T) {
+	c := features.Canvas_(10, 20)
+	if c.Width != 10 {
+		t.Error("Width should be 10")
+	}
+	if c.Height != 20 {
+		t.Error("Height should be 20")
+	}
+	for i := range c.Pixels {
+		for j := range c.Pixels[i] {
+			if c.Pixels[i][j] != features.Color_(0, 0, 0) {
+				t.Error("Color should be 0,0,0")
+			}
+		}
+	}
+}
+
+func TestWritePixel(t *testing.T) {
+	c := features.Canvas_(10, 20)
+	red := features.Color_(1, 0, 0)
+	c.WritePixel(2, 3, red)
+	pixel := c.Pixels[2][3]
+	if pixel.Red != 1 {
+		fmt.Println(pixel.Red)
+		t.Error("Red should be 1")
+	}
+	if pixel.Green != 0 {
+		t.Error("Green should be 0")
+	}
+	if pixel.Blue != 0 {
+		t.Error("Blue should be 0")
+	}
+}
+

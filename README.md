@@ -1,6 +1,6 @@
 # Ray tracing challenge in Golang
 The Ray Tracer Challenge A Test-Driven Guide to Your First 3D Renderer by Jamis Buck 
-(Ray Tracer challenge)[https://www.amazon.com/Ray-Tracer-Challenge-Test-Driven-Renderer/dp/1680502719]
+[Ray Tracer challenge](https://www.amazon.com/Ray-Tracer-Challenge-Test-Driven-Renderer/dp/1680502719)
 
 # Changelog
 - Completed first chapter
