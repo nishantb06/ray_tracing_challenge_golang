@@ -16,4 +16,15 @@ func main() {
 	}
 	fmt.Println(p.GetX(), p.GetY(), p.GetZ(), p.GetW(), p.GetProperty())
 	fmt.Println(features.GetTuple("point", 2, 2, 3))
+
+	normalizedVector, _ := features.Normalize(features.Vector(1, 1, 0))
+	normalizedVector, _ = features.Multiply(normalizedVector, 0.2)
+	proj := features.Projectile{Position: features.Point(0, 1, 0), Velocity: normalizedVector}
+	env := features.Environment{Gravity: features.Vector(0, -0.1, 0), Wind: features.Vector(-0.01, 0, 0)}
+	fmt.Println(proj, env)
+
+	for proj.Position.GetY() > 0 {
+		proj = features.Tick(env, proj)
+		fmt.Println(proj.Position.GetX(), proj.Position.GetY(), proj.Position.GetZ())
+	}
 }
