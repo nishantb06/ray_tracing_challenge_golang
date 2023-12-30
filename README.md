@@ -11,4 +11,5 @@ The Ray Tracer Challenge A Test-Driven Guide to Your First 3D Renderer by Jamis 
     However, you can achieve similar functionality in Go by defining methods with custom names to implement specific operations. This approach allows you to create methods that mimic the behavior of operators.
     - includes basic functions like dot,cross,magnitude and scalar on points and vectors
     - figured out how to write tests in golang
+    - code for environment,projectile and Tick added. 
 
