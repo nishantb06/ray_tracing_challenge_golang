@@ -27,4 +27,15 @@ func main() {
 		proj = features.Tick(env, proj)
 		fmt.Println(proj.Position.GetX(), proj.Position.GetY(), proj.Position.GetZ())
 	}
+	multiLineString :=
+		`This is a
+multi-line
+string in Go.
+It preserves
+line breaks.`
+	line2 := "This is a\nmulti-line\nstring in Go.\nIt preserves\nline breaks."
+	fmt.Println(multiLineString)
+	fmt.Println(line2)
+	fmt.Println("==================================================")
+	fmt.Println(multiLineString + "\n" + line2)
 }
