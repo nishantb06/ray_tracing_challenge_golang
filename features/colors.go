@@ -1,5 +1,9 @@
 package features
 
+import (
+	"fmt"
+)
+
 type Color struct {
 	Red, Green, Blue float64
 }
@@ -71,3 +75,13 @@ func (c Canvas) WritePixel(x, y int, color Color) {
 	c.Pixels[x][y] = color
 }
 
+func CanvasToPPM(c Canvas) string {
+	// get height and widht of the canvas
+	height := c.Height
+	width := c.Width
+	// PPM header
+	header := fmt.Sprintf("P3\n%d %d\n255\n", width, height)
+	return header
+}
+
+//

@@ -2,6 +2,7 @@ package features
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/nishantb06/ray_tracing_challenge_golang/features"
@@ -155,3 +156,18 @@ func TestWritePixel(t *testing.T) {
 	}
 }
 
+func TestCanvasToPPM(t *testing.T) {
+	c := features.Canvas_(5, 3)
+	ppm := features.CanvasToPPM(c)
+	// first 3 lines of ppm are​
+	lines := strings.Split(ppm, "\n")
+	if lines[0] != "P3" {
+		t.Error("first line of ppm should be P3")
+	}
+	if lines[1] != "5 3" {
+		t.Error("second line of ppm should be 5 3")
+	}
+	if lines[2] != "255" {
+		t.Error("third line of ppm should be 255")
+	}
+}
