@@ -190,4 +190,27 @@ func TestCanvasToPPM(t *testing.T) {
 	if lines[5] != "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255" {
 		t.Error("sixth line of ppm should be 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255")
 	}
+
+	c = features.Canvas_(10, 2)
+	c1 := features.Color_(1, 0.8, 0.6)
+	for i := range c.Pixels {
+		for j := range c.Pixels[i] {
+			c.WritePixel(j, i, c1)
+		}
+	}
+	ppm = features.CanvasToPPM(c)
+	lines = strings.Split(ppm, "\n")
+	if lines[3] != "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 " {
+		t.Error("fourth line of ppm should be 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204")
+	}
+	if lines[4] != "153 255 204 153 255 204 153 255 204 153 255 204 153" {
+		t.Error("fifth line of ppm should be 153 255 204 153 255 204 153 255 204 153 255 204 153")
+	}
+	if lines[5] != "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 " {
+		t.Error("sixth line of ppm should be 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204")
+	}
+	if lines[6] != "153 255 204 153 255 204 153 255 204 153 255 204 153" {
+		t.Error("seventh line of ppm should be 153 255 204 153 255 204 153 255 204 153 255 204 153")
+	}
+
 }
