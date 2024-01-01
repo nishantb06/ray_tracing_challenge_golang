@@ -143,7 +143,7 @@ func TestWritePixel(t *testing.T) {
 	c := features.Canvas_(10, 20)
 	red := features.Color_(1, 0, 0)
 	c.WritePixel(2, 3, red)
-	pixel := c.Pixels[2][3]
+	pixel := c.Pixels[3][2]
 	if pixel.Red != 1 {
 		fmt.Println(pixel.Red)
 		t.Error("Red should be 1")
@@ -161,6 +161,7 @@ func TestCanvasToPPM(t *testing.T) {
 	ppm := features.CanvasToPPM(c)
 	// first 3 lines of ppm are​
 	lines := strings.Split(ppm, "\n")
+	fmt.Println(len(lines))
 	if lines[0] != "P3" {
 		t.Error("first line of ppm should be P3")
 	}
@@ -169,5 +170,24 @@ func TestCanvasToPPM(t *testing.T) {
 	}
 	if lines[2] != "255" {
 		t.Error("third line of ppm should be 255")
+	}
+	c.WritePixel(0, 0, features.Color_(1.5, 0, 0))
+	c.WritePixel(2, 1, features.Color_(0, 0.5, 0))
+	c.WritePixel(4, 2, features.Color_(-0.5, 0, 1))
+
+	// checking the fourth, fifth and sixth line of ppm
+	ppm = features.CanvasToPPM(c)
+	fmt.Println(ppm)
+	lines = strings.Split(ppm, "\n")
+	fmt.Println(len(lines))
+	if lines[3] != "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0" {
+		t.Error("fourth line of ppm should be 255 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
+	}
+	if lines[4] != "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0" {
+		fmt.Println(lines[4])
+		t.Error("fifth line of ppm should be 0 0 0 0 0 0 0 128 0 0 0 0 0 0 0")
+	}
+	if lines[5] != "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255" {
+		t.Error("sixth line of ppm should be 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255")
 	}
 }

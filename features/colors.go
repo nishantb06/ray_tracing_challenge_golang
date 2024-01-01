@@ -2,6 +2,9 @@ package features
 
 import (
 	"fmt"
+	"math"
+	"os"
+	"strings"
 )
 
 type Color struct {
@@ -72,16 +75,65 @@ func (c Canvas) WritePixel(x, y int, color Color) {
 	if x < 0 || x >= c.Width || y < 0 || y >= c.Height {
 		panic("pixel out of bounds")
 	}
-	c.Pixels[x][y] = color
+	c.Pixels[y][x] = color
 }
 
 func CanvasToPPM(c Canvas) string {
-	// get height and widht of the canvas
+	// get height and width of the canvas
 	height := c.Height
 	width := c.Width
 	// PPM header
 	header := fmt.Sprintf("P3\n%d %d\n255\n", width, height)
-	return header
+	pixels := ""
+	for i := range c.Pixels {
+		line := ""
+		for j := range c.Pixels[i] {
+			pixel := c.Pixels[i][j]
+			// convert each color value to a string
+			red := fmt.Sprintf("%d", clamp(int(math.Ceil(pixel.Red*255)), 0, 255))
+			green := fmt.Sprintf("%d", clamp(int(math.Ceil(pixel.Green*255)), 0, 255))
+			blue := fmt.Sprintf("%d", clamp(int(math.Ceil(pixel.Blue*255)), 0, 255))
+			// append the color values to the line string
+			line += fmt.Sprintf("%s %s %s ", red, green, blue)
+			// check if the line exceeds 70 characters
+			if len(line) > 70 {
+				// append the line to the pixels string and start a new line
+				pixels += strings.TrimRight(line, " ") + "\n"
+				line = ""
+			}
+		}
+		// append the remaining line to the pixels string
+		pixels += strings.TrimRight(line, " ") + "\n"
+	}
+	return header + pixels
 }
 
-//
+func clamp(value, min, max int) int {
+	if value < min {
+		return min
+	}
+	if value > max {
+		return max
+	}
+	return value
+}
+
+func PPMToFile(ppm string, filename string) {
+	// write the ppm string to a .ppm file
+	// create a file with the given filename
+	f, err := os.Create(filename)
+	if err != nil {
+		panic(err)
+	}
+	// write the ppm string to the file
+	_, err = f.WriteString(ppm)
+	if err != nil {
+		panic(err)
+	}
+	// close the file
+	err = f.Close()
+	if err != nil {
+		panic(err)
+	}
+
+}
