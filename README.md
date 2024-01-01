@@ -13,3 +13,13 @@ The Ray Tracer Challenge A Test-Driven Guide to Your First 3D Renderer by Jamis 
     - figured out how to write tests in golang
     - code for environment,projectile and Tick added. 
 
+- Completed Second chapter
+    - inlcudes functionality like Adding and subtracting colors as both methods and independent function
+    - inlcudes code to create,edit and save a canvas as a ppm file. use command `open <filename>.ppm` to open a ppm file in mac.
+    - code to simulate a projectile and get its ppm file
+    - yet to implement proper formating of ppm files, currently line length exceed a bit more than 70 characters in ppm file
+    - yet to see how to write better tests, till now tests have been very simple
+    - yet to add functions as methods to Tuples , this will make code a lot simpler in the future.
+    - This is what a simulated projectile looks like
+    ![projectile.ppm](images/sample_projectile.png)
+
