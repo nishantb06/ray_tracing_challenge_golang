@@ -2,6 +2,11 @@
 The Ray Tracer Challenge A Test-Driven Guide to Your First 3D Renderer by Jamis Buck 
 [Ray Tracer challenge](https://www.amazon.com/Ray-Tracer-Challenge-Test-Driven-Renderer/dp/1680502719)
 
+# Practises I followed
+1. Constructors for anythings will be of the form "<Name>_" for example "Canvas_()"
+2. Writing tests before the actual function
+3. 
+
 # Changelog
 - Completed first chapter
     - includes factory pattern for creation of point and vector
